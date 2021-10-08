@@ -1,11 +1,12 @@
 package com.ah.data;
 
-import java.util.Objects;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Garage {
@@ -15,16 +16,8 @@ public class Garage {
 	private String name;
 	private String address;
 
-	public Garage(Integer id, String name, String address) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.address = address;
-	}
-
-	public Garage() {
-		super();
-	}
+	@OneToMany(mappedBy = "garage")
+	private List<Vehicle> vehicle;
 
 	public Integer getId() {
 		return id;
@@ -50,27 +43,12 @@ public class Garage {
 		this.address = address;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(address, id, name);
+	public List<Vehicle> getVehicle() {
+		return vehicle;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Garage other = (Garage) obj;
-		return Objects.equals(address, other.address) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name);
-	}
-
-	@Override
-	public String toString() {
-		return "Garage [id=" + id + ", name=" + name + ", address=" + address + "]";
+	public void setVehicle(List<Vehicle> vehicle) {
+		this.vehicle = vehicle;
 	}
 
 }

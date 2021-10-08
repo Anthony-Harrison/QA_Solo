@@ -13,17 +13,17 @@ public class Vehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String type;
+	private String model;
 	private int noOfWheels;
 	private int weight;
 
 	@ManyToOne
-	private int garageId;
+	private Garage garage;
 
-	public Vehicle(Integer id, String type, int noOfWheels, int weight) {
+	public Vehicle(Integer id, String model, int noOfWheels, int weight) {
 		super();
 		this.id = id;
-		this.type = type;
+		this.model = model;
 		this.noOfWheels = noOfWheels;
 		this.weight = weight;
 	}
@@ -40,12 +40,12 @@ public class Vehicle {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
+	public String getModel() {
+		return model;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
 	public int getNoOfWheels() {
@@ -64,17 +64,17 @@ public class Vehicle {
 		this.weight = weight;
 	}
 
-	public int getGarageId() {
-		return garageId;
+	public Garage getGarage() {
+		return garage;
 	}
 
-	public void setGarageId(int garageId) {
-		this.garageId = garageId;
+	public void setGarage(Garage garage) {
+		this.garage = garage;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(garageId, id, noOfWheels, type, weight);
+		return Objects.hash(garage, id, noOfWheels, model, weight);
 	}
 
 	@Override
@@ -86,8 +86,8 @@ public class Vehicle {
 		if (getClass() != obj.getClass())
 			return false;
 		Vehicle other = (Vehicle) obj;
-		return garageId == other.garageId && Objects.equals(id, other.id) && noOfWheels == other.noOfWheels
-				&& Objects.equals(type, other.type) && weight == other.weight;
+		return Objects.equals(garage, other.garage) && Objects.equals(id, other.id) && noOfWheels == other.noOfWheels
+				&& Objects.equals(model, other.model) && weight == other.weight;
 	}
 
 }
